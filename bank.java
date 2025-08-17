@@ -50,6 +50,11 @@ void registerUser() {
     System.out.print("Enter password: ");
     String password = sc.nextLine().trim();
 
+    // Call validate method
+    if (!validate(username, password, email)) {
+        return; // Stop if invalid
+    }
+
     // If all are valid → register user
     usernames[countOfuser] = username;
     passwords[countOfuser] = password;
@@ -59,6 +64,29 @@ void registerUser() {
 
     System.out.println(" Registration successful!");
 }
+
+// Validation Method
+boolean validate(String username, String password, String email) {
+    boolean isValid = true;
+
+    if (username == null || username.length() < 3) {
+        System.out.println(" Username must be 3 characters.");
+        isValid = false;
+    }
+
+    if (password == null || password.length() < 8) {
+        System.out.println(" Password must be 8 characters.");
+        isValid = false;
+    }
+
+    if (email == null || email.length() < 5 || !email.contains("@") || !email.contains(".")) {
+        System.out.println("Invalid email format.");
+        isValid = false;
+    }
+
+    return isValid; // true if no errors, false if any error found
+}
+
 
     // method of login
     void loginUser() {
@@ -124,3 +152,4 @@ void registerUser() {
         System.out.println(" Current Balance is : " + balances[i]);
     }
 }
+    
